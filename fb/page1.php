@@ -64,24 +64,17 @@ if ($user) {
     <h1>Sample web app using facebook php SDK </h1>
 
     <?php if ($user): ?>
-      <a href="<?php echo $logoutUrl; ?>">Logout</a>
-      <br>
-      <a href="?logout=1">Logout Local</a>
+      <a href="?logout=1">Logout</a>
     <?php else: ?>
       <div>
-        Login using OAuth 2.0 handled by the PHP SDK:
         <a href="<?php echo $loginUrl; ?>">Login with Facebook</a><br>
       </div>
     <?php endif ?>
-
-    <h3>PHP Session</h3>
-    <pre><?php print_r($_SESSION); ?></pre>
 
     <?php if ($user): ?>
       <h3> Welcome <?php echo $user_profile['name']; ?> !!! </h3>
       <img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
 
-      <h3>Your friend list Object is as follows (/me/friends?token=<?php echo $access_token; ?>)</h3>
       <pre><?php print_r($user_response); ?></pre>
     <?php else: ?>
       <strong><em>You are not Connected.</em></strong>
