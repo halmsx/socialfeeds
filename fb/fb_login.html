@@ -15,9 +15,13 @@
         } else if (response.status === 'not_authorized') {
           document.getElementById('status').innerHTML = 'Please log ' +
                   'into this app.';
+          
+          document.getElementById('fb-button').style.display = 'block';
         } else {
           document.getElementById('status').innerHTML = 'Please log ' +
                   'into Facebook.';
+
+          document.getElementById('fb-button').style.display = 'block';
         }
       }
 
@@ -61,11 +65,10 @@
       }
     </script>
 
-  <fb:login-button scope="public_profile,read_stream,read_friendlists,user_friends" onlogin="checkLoginState();"></fb:login-button>
+    <div id="fb-root">
+      <fb:login-button id="fb-button" style="display: none" scope="public_profile,read_stream,read_friendlists,user_friends" onlogin="checkLoginState();"></fb:login-button>
+      <div id="status"></div>
+    </div>
 
-  <div id="status">
-  </div>
-
-  <div>TODO write content</div>
-</body>
+  </body>
 </html>
