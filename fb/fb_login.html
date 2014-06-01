@@ -10,16 +10,15 @@
         console.log('statusChangeCallback');
         console.log(response);
         if (response.status === 'connected') {
+          document.getElementById('status').innerHTML = 'Logging in...';
           updatePage();
           window.location.replace('page1.php');
         } else if (response.status === 'not_authorized') {
-          document.getElementById('status').innerHTML = 'Please log ' +
-                  'into this app.';
+          document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
           
           document.getElementById('fb-button').style.display = 'block';
         } else {
-          document.getElementById('status').innerHTML = 'Please log ' +
-                  'into Facebook.';
+          document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
 
           document.getElementById('fb-button').style.display = 'block';
         }
@@ -59,8 +58,7 @@
         console.log('Welcome!  Fetching your information.... ');
         FB.api('/me', function(response) {
           console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-                  'Thanks for logging in, ' + response.name + '!';
+//          document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
         });
       }
     </script>
