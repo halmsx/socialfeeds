@@ -12,8 +12,9 @@ $user = $facebook->getUser();
 
 if (isset($_GET['logout'])) {
   $facebook->destroySession();
-  
+
   header("Location: fb_logout.html");
+  exit();
 }
 
 $access_token = $facebook->getAccessToken();
@@ -23,7 +24,7 @@ if ($user) {
 //    $user_response = $facebook->api('/me/permissions?access_token=' . $access_token);
     $user_response = $facebook->api('/me/home');
 
-    // Proceed knowing you have a logged in user who's authenticated.
+// Proceed knowing you have a logged in user who's authenticated.
     $user_profile = $facebook->api('/me');
   } catch (FacebookApiException $e) {
     error_log($e);
@@ -37,7 +38,9 @@ if ($user) {
 
   $logoutUrl = $facebook->getLogoutUrl($params);
 } else {
-  $loginUrl = $facebook->getLoginUrl();
+//  $loginUrl = $facebook->getLoginUrl();
+  header('Location: fb_login.html');
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -45,16 +48,16 @@ if ($user) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <title>php-sdk</title>
+    <title>FB Feeds</title>
     <style>
       body {
         font-family: 'Lucida Grande', Verdana, Arial, sans-serif;
       }
-      h1 a {
+      a {
         text-decoration: none;
         color: #3b5998;
       }
-      h1 a:hover {
+      a:hover {
         text-decoration: underline;
       }
     </style>
@@ -75,9 +78,18 @@ if ($user) {
       <h3> Welcome <?php echo $user_profile['name']; ?> !!! </h3>
       <img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
 
-      <pre><?php print_r($user_response); ?></pre>
-    <?php else: ?>
-      <strong><em>You are not Connected.</em></strong>
-    <?php endif ?>
+      <div id="fb-root">
+      <!--<pre><?php print_r($user_response); ?></pre>-->
+        <?php
+        foreach ($user_response['data'] as $i => $v) {
+          print ($v['from']['name']);
+
+          echo "<br>";
+        }
+        ?>
+      <?php else: ?>
+        <strong><em>You are not Connected.</em></strong>
+      <?php endif ?>
+    </div>
   </body>
 </html>
