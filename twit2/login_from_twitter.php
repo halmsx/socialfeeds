@@ -24,5 +24,5 @@ if (isset($_GET['oauth_token'])) {
   $_SESSION['twitter_id'] = $twitter_id;
   $_SESSION['screen_name'] = $screen_name; //This is the @name
 } else {
-  header('Location: http://1939.site90.net/');
+  header('Location: http://1939.site90.net/socialfeeds/twit2/');
 }
